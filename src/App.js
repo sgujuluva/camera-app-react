@@ -1,5 +1,6 @@
 //react lib
 import { useEffect, useRef } from "react";
+import {BsFillCameraFill} from "react-icons/bs"
 import ImageGallery from "react-image-gallery";
 //styles
 import "./App.css";
@@ -15,7 +16,7 @@ function App() {
     // intialising the response object to video sourceobj
       video.srcObject = response;
    // video streaming (auto play)
-        video.play(); 
+       /*  video.play();  */
     })
   },[videoRef])
 
@@ -39,7 +40,7 @@ function App() {
       <h1>Camera App</h1>
       
       <video ref = {videoRef}></video>
-      <button onClick={handleClick}>Take Picture</button>
+      <button onClick={handleClick}><BsFillCameraFill/>Take Picture</button>
       <canvas ref={photoRef}></canvas> 
     </div>
   );
