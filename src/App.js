@@ -16,7 +16,7 @@ function App() {
     // intialising the response object to video sourceobj
       video.srcObject = response;
    // video streaming (auto play)
-       /*  video.play();  */
+         video.play();  
     })
   },[videoRef])
 
@@ -35,12 +35,20 @@ function App() {
     let ctx = photo.getContext("2d");
     ctx.drawImage(video,0,0,width,height)
   }
+  const handleReset = () => {
+    photoRef.current = ""; //check---------------not working
+  
+  }
   return (
     <div className="App">
       <h1>Camera App</h1>
       
       <video ref = {videoRef}></video>
-      <button onClick={handleClick}><BsFillCameraFill/>Take Picture</button>
+      <div className = "button">
+      <button className = "takePic" onClick={handleClick}><BsFillCameraFill/>Take Picture</button>
+      <button className = "reset" onClick = {handleReset}>Reset</button>
+      </div>
+      
       <canvas ref={photoRef}></canvas> 
     </div>
   );

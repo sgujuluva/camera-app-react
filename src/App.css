@@ -15,11 +15,25 @@ video {
   height: 40vh;
   margin-bottom: 2rem;
 }
-button {
+.button {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  width: 15%;
+  font-size: 1rem;
+ border: none;
+}
+
+.takePic{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: deepskyblue;
-  height: 2rem;
-  width: 10%;
-  font-size: 1.2rem;
+ 
+}
+.reset {
+  background-color: grey;
 }
 canvas{
   margin : 2rem;
