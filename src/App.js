@@ -10,12 +10,12 @@ function App() {
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({video : true})
     .then(response => {
-     
+     //capturing the current video using useRef
       let video = videoRef.current;
-    
+    // intialising the response object to video sourceobj
       video.srcObject = response;
-   
-       video.play();
+   // video streaming (auto play)
+        video.play(); 
     })
   },[videoRef])
 
@@ -37,8 +37,9 @@ function App() {
   return (
     <div className="App">
       <h1>Camera App</h1>
-      <button onClick={handleClick}>Take Picture</button>
+      
       <video ref = {videoRef}></video>
+      <button onClick={handleClick}>Take Picture</button>
       <canvas ref={photoRef}></canvas> 
     </div>
   );
