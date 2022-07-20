@@ -20,7 +20,10 @@ function App() {
   },[videoRef])
 
   const handleClick = () => {
-    
+    let video = videoRef.current;
+    let photo = photoRef.current;
+    const width = 400;
+    const height = 500;
   }
   return (
     <div className="App">
