@@ -1,7 +1,9 @@
 //react lib
 import { useEffect, useRef } from "react";
 import {BsFillCameraFill} from "react-icons/bs"
-import ImageGallery from "react-image-gallery";
+import camImg from "../src/images/camera-ani.gif"
+import resetImg from "./images/reset.png"
+
 //styles
 import "./App.css";
 
@@ -26,8 +28,8 @@ function App() {
     //capturing the current photo from the current video
     let photo = photoRef.current;
     //setting height and width to draw in canvas
-    const width = 500;
-    const height = 200;
+    const width = video.offsetWidth;
+    const height = video.offsetHeight;
     //setting height and width for the photo captured
     photo.width = width;
     photo.height = height;
@@ -41,12 +43,11 @@ function App() {
   }
   return (
     <div className="App">
-      <h1>Camera App</h1>
-      
+      <h1>Camera App</h1>      
       <video ref = {videoRef}></video>
       <div className = "button">
-      <button className = "takePic" onClick={handleClick}><BsFillCameraFill/>Take Picture</button>
-      <button className = "reset" onClick = {handleReset}>Reset</button>
+      <img src={camImg} alt = "camera img" className = "takePic" onClick={handleClick}/>
+      <img src={resetImg} alt = "reset img" className = "reset" onClick = {handleReset}/>
       </div>
       
       <canvas ref={photoRef}></canvas> 

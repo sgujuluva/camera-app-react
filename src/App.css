@@ -11,8 +11,8 @@
 video {
   display: flex;
   align-items: center;
-  width: 80vw;
-  height: 40vh;
+   /* width: 80vw;
+  height: 40vh;  */
   margin-bottom: 2rem;
 }
 .button {
@@ -37,6 +37,8 @@ video {
 }
 canvas{
   margin : 2rem;
-  width:30%;
-  height : 50%;
+  width: 80vw;
+  height: 40vh; 
+ /*  width:30%;
+  height : 50%; */
 }
