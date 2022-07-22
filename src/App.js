@@ -1,13 +1,16 @@
 //react lib
-import { useEffect, useRef } from "react";
-import {BsFillCameraFill} from "react-icons/bs"
-import camImg from "../src/images/camera-ani.gif"
+import { useEffect, useRef,useState } from "react";
+//import {BsFillCameraFill} from "react-icons/bs"
 import resetImg from "./images/reset.png"
-
+import cameraImg from "./images/camera-ani.gif"
+import cameraStill from "./images/camera-still.png"
+ 
 //styles
 import "./App.css";
 
 function App() {
+  const [camImg,setCamImg] = useState(cameraStill)
+
   let videoRef = useRef(null);
   let photoRef = useRef(null);
   useEffect(() => {
@@ -23,6 +26,8 @@ function App() {
   },[videoRef])
 
   const handleClick = () => {
+    //while clicking cameraani pic to be shown from still to ani
+    setCamImg(cameraImg );
     //capturing the current video
     let video = videoRef.current;
     //capturing the current photo from the current video
@@ -35,7 +40,11 @@ function App() {
     photo.height = height;
     //drawing in canvas
     let ctx = photo.getContext("2d");
-    ctx.drawImage(video,0,0,width,height)
+    ctx.drawImage(video,0,0,width,height);
+    //to bring the animated camer to normal camera---setting to normal
+    setTimeout(function(){
+      setCamImg(cameraStill);
+    },1500)
   }
   const handleReset = () => {
     photoRef.current = ""; //check---------------not working
