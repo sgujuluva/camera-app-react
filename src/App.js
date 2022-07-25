@@ -47,7 +47,9 @@ function App() {
     },1500)
   }
   const handleReset = () => {
-    
+    let photo = photoRef.current;
+    let ctx = photo.getContext("2d");
+    ctx.clearRect(0,0,photo.width,photo.height);
   
   }
   return (
