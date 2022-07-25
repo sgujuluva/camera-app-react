@@ -4,13 +4,15 @@ import { useEffect, useRef,useState } from "react";
 import resetImg from "./images/reset.png"
 import cameraImg from "./images/camera-ani.gif"
 import cameraStill from "./images/camera-still.png"
+import uploadImg from "./images/upload.gif"
+import downloadImg from "./images/download.gif"
  
 //styles
 import "./App.css";
 
 function App() {
   const [camImg,setCamImg] = useState(cameraStill)
-
+const [base64Img, setBase64Img] = useState("");
   let videoRef = useRef(null);
   let photoRef = useRef(null);
   useEffect(() => {
@@ -49,9 +51,14 @@ function App() {
   const handleReset = () => {
     let photo = photoRef.current;
     let ctx = photo.getContext("2d");
-    ctx.clearRect(0,0,photo.width,photo.height);
-  
+    ctx.clearRect(0,0,photo.width,photo.height);  
   }
+
+  const handleUpload = () => {
+    let photo = photoRef.current;
+    const convert2Base64 = photo.toDataURL("image/jeg");
+    setBase64Img(convert2Base64);
+      }
   return (
     <div className="App">
       <h1>Camera App</h1>      
@@ -62,8 +69,14 @@ function App() {
       </div>
       
       <canvas ref={photoRef}></canvas> 
+      <div className = "load">
+        <button className = "upload" onClick = {handleUpload}><img src={uploadImg}/></button>
+        <button className = "download"><img src={downloadImg}/></button>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+/* <img src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dz"  */
