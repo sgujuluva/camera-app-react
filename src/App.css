@@ -9,11 +9,11 @@
 }
 
 video {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
    /* width: 80vw;
   height: 40vh;  */
-  margin-bottom: 2rem;
+  /*margin-bottom: 2rem;  */
 }
 .button {
   display:flex;
@@ -36,9 +36,9 @@ video {
   background-color: grey;
 }
 canvas{
-  margin : 2rem;
+ /*  margin : 2rem;
   width: 80vw;
-  height: 40vh; 
+  height: 40vh; */ 
  /*  width:30%;
   height : 50%; */
 }
