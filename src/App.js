@@ -47,7 +47,7 @@ function App() {
     },1500)
   }
   const handleReset = () => {
-    photoRef.current = ""; //check---------------not working
+    
   
   }
   return (

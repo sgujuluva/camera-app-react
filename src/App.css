@@ -42,3 +42,9 @@ canvas{
  /*  width:30%;
   height : 50%; */
 }
+img{
+  height : 2rem;
+}
+img:nth-child(1) , img:nth-child(2){
+  background-color:transparent;
+}
