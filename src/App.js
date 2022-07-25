@@ -12,6 +12,7 @@ import "./App.css";
 
 function App() {
   const [camImg,setCamImg] = useState(cameraStill)
+  const [loadImg, setLoadImg] = useState("")
 const [base64Img, setBase64Img] = useState("");
   let videoRef = useRef(null);
   let photoRef = useRef(null);
@@ -38,8 +39,8 @@ const [base64Img, setBase64Img] = useState("");
     const width = video.offsetWidth;
     const height = video.offsetHeight;
     //setting height and width for the photo captured
-    photo.width = width;
-    photo.height = height;
+    /* photo.width = width;
+    photo.height = height; */
     //drawing in canvas
     let ctx = photo.getContext("2d");
     ctx.drawImage(video,0,0,width,height);
@@ -49,15 +50,20 @@ const [base64Img, setBase64Img] = useState("");
     },1500)
   }
   const handleReset = () => {
+    setLoadImg("") // --------------not working--------
     let photo = photoRef.current;
     let ctx = photo.getContext("2d");
-    ctx.clearRect(0,0,photo.width,photo.height);  
+    ctx.clearRect(0,0,photo.width,photo.height); 
+    setTimeout(function(){// --------------not working--------
+      setLoadImg(uploadImg);
+    },1500) 
   }
 
   const handleUpload = () => {
     let photo = photoRef.current;
     const convert2Base64 = photo.toDataURL("image/jeg");
     setBase64Img(convert2Base64);
+    
       }
   return (
     <div className="App">
