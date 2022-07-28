@@ -11,12 +11,16 @@ import downloadImg from "./images/download.gif";
  import "./App.css"; 
 
 function App() {
+  //setting the state for camera still and camera animation image
   const [camImg, setCamImg] = useState(cameraStill);
-  const [loadImg, setLoadImg] = useState(false);
+  //setting the state for upload icon
+  const [uploadIcon, setUploadIcon] = useState(false);
+  //setting the state of base64 image (to convert canvas image to normal image)
   const [base64Img, setBase64Img] = useState("");
   let videoRef = useRef(null);
   let photoRef = useRef(null);
   useEffect(() => {
+    // getting the video of user using mediadevices
     navigator.mediaDevices.getUserMedia({ video: true }).then((response) => {
       //capturing the current video using useRef
       let video = videoRef.current;
@@ -30,8 +34,8 @@ function App() {
   const handleClick = () => {
     //while clicking cameraani pic to be shown from still to ani
     setCamImg(cameraImg);
-
-    setLoadImg(true);
+// once the pic is captured the upload icon is shown
+    setUploadIcon(true);
     
     //capturing the current video
     let video = videoRef.current;
@@ -46,22 +50,27 @@ function App() {
     //drawing in canvas
     let ctx = photo.getContext("2d");
     ctx.drawImage(video, 0, 0, width, height);
-    //to bring the animated camer to normal camera---setting to normal
+    //to bring the animated camera to normal camera---setting to normal
     setTimeout(function () {
       setCamImg(cameraStill);
     }, 1500);
   };
   const handleReset = () => {
-    setLoadImg(false); 
+    //once the reset button is clicked, hide the upload icon
+    setUploadIcon(false); 
+    //capture the current image 
     let photo = photoRef.current;
+    //usng .getcontext method
     let ctx = photo.getContext("2d");
+    // clear the current image
     ctx.clearRect(0, 0, photo.width, photo.height);
     
   };
 
   const handleUpload = () => {
     let photo = photoRef.current;
-    const convert2Base64 = photo.toDataURL("image/jeg");
+    //converting the canvas photo to base64 normaljpeg image
+    const convert2Base64 = photo.toDataURL("image/jpeg");
     setBase64Img(convert2Base64);
   };
   return (
@@ -85,11 +94,11 @@ function App() {
 
       <canvas ref={photoRef}></canvas>
       <div className="load">
-        {loadImg ? (<div><button className="upload" onClick={handleUpload}>
-          <img src={uploadImg} />
+        {uploadIcon ? (<div><button className="upload" onClick={handleUpload}>
+          <img src={uploadImg} alt="upload icon" />
         </button>
         <button className="download">
-          <img src={downloadImg} />
+          <img src={downloadImg} alt="download icon"/>
         </button></div>) : ""}
       </div>
     </div>
