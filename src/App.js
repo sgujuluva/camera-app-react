@@ -8,7 +8,7 @@ import uploadImg from "./images/upload.gif";
 import downloadImg from "./images/download.gif";
 
 //styles
- import "./App.css"; 
+import "./App.css";
 
 function App() {
   //setting the state for camera still and camera animation image
@@ -34,9 +34,9 @@ function App() {
   const handleClick = () => {
     //while clicking cameraani pic to be shown from still to ani
     setCamImg(cameraImg);
-// once the pic is captured the upload icon is shown
+    // once the pic is captured the upload icon is shown
     setUploadIcon(true);
-    
+
     //capturing the current video
     let video = videoRef.current;
     //capturing the current photo from the current video
@@ -57,22 +57,24 @@ function App() {
   };
   const handleReset = () => {
     //once the reset button is clicked, hide the upload icon
-    setUploadIcon(false); 
-    //capture the current image 
+    setUploadIcon(false);
+    //capture the current image
     let photo = photoRef.current;
     //usng .getcontext method
     let ctx = photo.getContext("2d");
     // clear the current image
     ctx.clearRect(0, 0, photo.width, photo.height);
-    
   };
 
-  const handleUpload = () => {
+  const fnConvert2Base64 = () => {
     let photo = photoRef.current;
     //converting the canvas photo to base64 normaljpeg image
     const convert2Base64 = photo.toDataURL("image/jpeg");
     setBase64Img(convert2Base64);
   };
+
+  const fnUploadImg = () => {};
+
   return (
     <div className="App">
       <h1>Camera App</h1>
@@ -94,12 +96,22 @@ function App() {
 
       <canvas ref={photoRef}></canvas>
       <div className="load">
-        {uploadIcon ? (<div><button className="upload" onClick={handleUpload}>
-          <img src={uploadImg} alt="upload icon" />
-        </button>
-        <button className="download">
-          <img src={downloadImg} alt="download icon"/>
-        </button></div>) : ""}
+        {uploadIcon ? (
+          <div>
+            <button className="upload" onClick={fnUploadImg}>
+              <img src={uploadImg} alt="upload icon" />
+              Upload
+            </button>
+            <button className="download" onClick={fnConvert2Base64}>
+              <a href={base64Img} download>
+                <img src={downloadImg} alt="download icon" />
+              </a>
+              Download
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
