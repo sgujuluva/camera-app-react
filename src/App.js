@@ -31,7 +31,7 @@ function App() {
     });
   }, [videoRef]);
 
-  const handleClick = () => {
+  const takePicture = () => {
     //while clicking cameraani pic to be shown from still to ani
     setCamImg(cameraImg);
     // once the pic is captured the upload icon is shown
@@ -55,7 +55,7 @@ function App() {
       setCamImg(cameraStill);
     }, 1500);
   };
-  const handleReset = () => {
+  const retakePicture = () => {
     //once the reset button is clicked, hide the upload icon
     setUploadIcon(false);
     //capture the current image
@@ -73,7 +73,15 @@ function App() {
     setBase64Img(convert2Base64);
   };
 
-  const fnUploadImg = () => {};
+  const fnUploadImg = () => {
+    let confirmVal = window.confirm("D you want to upload to your cloud?");
+    if(confirmVal){
+      fnConvert2Base64();
+      if(base64Img){
+        
+      }
+    }
+  };
 
   return (
     <div className="App">
@@ -84,13 +92,13 @@ function App() {
           src={camImg}
           alt="camera img"
           className="takePic"
-          onClick={handleClick}
+          onClick={takePicture}
         />
         <img
           src={resetImg}
           alt="reset img"
           className="reset"
-          onClick={handleReset}
+          onClick={retakePicture}
         />
       </div>
 
