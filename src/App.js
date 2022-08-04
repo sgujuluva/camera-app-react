@@ -6,6 +6,8 @@ import cameraImg from "./images/camera-ani.gif";
 import cameraStill from "./images/camera-still.png";
 import uploadImg from "./images/upload.gif";
 import downloadImg from "./images/download.gif";
+//bootstarp carousel
+import Carousel from 'react-bootstrap/Carousel';
 
 //styles
 import "./App.css";
@@ -17,6 +19,8 @@ function App() {
   const [uploadIcon, setUploadIcon] = useState(false);
   //setting the state of base64 image (to convert canvas image to normal image)
   const [base64Img, setBase64Img] = useState("");
+  //get the images and make carousel
+  const [images,setImages] = useState([])
   let videoRef = useRef(null);
   let photoRef = useRef(null);
   useEffect(() => {
@@ -78,11 +82,32 @@ function App() {
     if(confirmVal){
       fnConvert2Base64();
       if(base64Img){
-        
+        fetch("https://62eb826e705264f263d9e90b.mockapi.io/cameraapp",{
+          method:"POST",
+          body:JSON.stringify({
+            "Image":base64Img
+          }),
+          headers:{"Content-type":"application/json;charset=UTF-8"}
+        })
+        .then(response => response.json())
+        .then(success => {
+          console.log(success);
+          alert("Image has been uploaded successfully")
+        })
+        .then(fnGetImages())
+        .catch(error => alert(error))
       }
     }
   };
 
+  const fnGetImages = () => {
+    fetch("https://62eb826e705264f263d9e90b.mockapi.io/cameraapp"
+    .then(response => response.json())
+    .then(data => {
+      let images= data.map(i => ({src : `${i.image}`}))
+      setImages(images)
+    })
+    )}
   return (
     <div className="App">
       <h1>Camera App</h1>
@@ -120,6 +145,24 @@ function App() {
         ) : (
           ""
         )}
+      </div>
+      <div>
+        {
+          images ? (
+            <Carousel fade>
+            {images.map((image, index) => (
+              image.src ? 
+              <Carousel.Item key={index}>
+                <img
+                  className="d-block w-100"
+                  src={image.src}
+                  alt="First slide"
+                />
+              </Carousel.Item> : ""
+            ))}
+          </Carousel>
+            ) : ""
+        }
       </div>
     </div>
   );
